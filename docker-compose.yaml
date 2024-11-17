@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  app:
+    image: 'sha256:d99a54b43eee1787de7c26233beb6ad240bf1978133b7d66ea2d64002f75a8fd'
+    container_name: 'app'
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+
+    environment:
+      - DB_USER=misha
+      - DB_PASSWORD=root
+      - DB_URL=jdbc:mysql://db:3306/web
+    depends_on:
+      - db
+  db:
+    image: 'mysql'
+    container_name: db
+    expose:
+      - '3306'
+    environment:
+      - MYSQL_DATABASE=web
+      - MYSQL_USER=misha
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root # Пароль для root-пользователя
